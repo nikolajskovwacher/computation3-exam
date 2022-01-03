@@ -1,10 +1,10 @@
 /* === Imports === */
 import java.util.Random; // For simulating randomness in days
 import java.util.ArrayList; // For handling data on prisoners
-import java.util.Arrays;
-import java.util.List;
+import java.util.Arrays; // For handling data on prisoners
+import java.util.List; // For handling data on prisoners
 import java.util.HashMap; // For counting contraband items found
-import java.util.Map;
+import java.util.Map; // For counting contraband items found
 import java.util.Scanner; // For user input
 
 /* === PRISON SIMULATION CLASS === */
@@ -17,6 +17,7 @@ class PrisonSimulation {
     static int dayCount = 0;
     static int totalFights = 0;
     static int totalMoneyEarned = 0;
+    static String currentLocation;
 
     // Main function
     public static void main(String args[])
@@ -199,7 +200,7 @@ class PrisonSimulation {
         System.out.println("The prisoners are heading to the cafeteria to eat");
         calculateFight("cafeteria");
         // Midday (job, outside time)
-        System.out.println("Prisoners with jobs are going to work, others are going to their cells");
+        System.out.println("Prisoners with jobs who are working today, are going to work, others are going to their cells");
         simulateJobs();
         searchBeforeRecreation();
         System.out.println("The prisoners are heading outside for recreation time");
@@ -236,9 +237,12 @@ class PrisonSimulation {
 
     public static void simulateJobs() {
         Random rand = new Random(); // To simulate randomness of job effectiveness
+        int anyoneWorking = 0;
         for (int i = 0; i < Prisoners.size(); i++) {
             int moneyEarned = 0;
-            if (Prisoners.get(i).job == 1) {
+            int workToday = rand.nextInt(4);
+            if (Prisoners.get(i).job == 1 && workToday == 0) {
+                anyoneWorking = 1;
                 if (Prisoners.get(i).intelligence.equals("low")) {
                     moneyEarned += rand.nextInt(3);
                 } else if (Prisoners.get(i).intelligence.equals("medium")) {
@@ -248,9 +252,21 @@ class PrisonSimulation {
                 } else if (Prisoners.get(i).intelligence.equals("extreme")) {
                     moneyEarned += rand.nextInt(3) + 4;
                 };
-            Prisoners.get(i).money += moneyEarned;
-            totalMoneyEarned += moneyEarned;
+                Prisoners.get(i).money += moneyEarned;
+                totalMoneyEarned += moneyEarned;
+                if (Prisoners.get(i).jobTitle.equals("Kitchen Help")) {
+                    System.out.println(Prisoners.get(i).name + " is moving to the kitchen, to help prepare food for tomorrow");
+                } else if (Prisoners.get(i).jobTitle.equals("Cleaning")) {
+                    System.out.println(Prisoners.get(i).name + " is helping sweep the halls under supervision of a CO");
+                } else if (Prisoners.get(i).jobTitle.equals("Laundry Room Help")) {
+                    System.out.println(Prisoners.get(i).name + " is sorting clean laundry in the laundry room");
+                };
+                sleep(1000);
             };
+        };
+        if (anyoneWorking == 1) {
+            System.out.println("Prisoners with jobs are finished for today, and are leaving their work stations");
+            sleep(1000);
         };
     };
 
@@ -329,7 +345,7 @@ class PrisonSimulation {
                         System.out.println(Prisoners.get(i).name + " was previously eligible for parole, that status has been revoked!");
                         Prisoners.get(i).parole = "in-eligible";
                     if (Prisoners.get(i).contraband.equals("grenade") || Prisoners.get(i).contraband.equals("knife") || Prisoners.get(i).contraband.equals("shiv")) {
-                        System.out.println("As the confiscated item is a weapon, the prisoner has been moved to isolation for 3 days!");
+                        System.out.println("As the confiscated item is a weapon, " + Prisoners.get(i).name + " has been moved to isolation for 3 days!");
                         Prisoners.get(i).inIsolation = 1;
                         Prisoners.get(i).isolationLeft = 3;
                     };
