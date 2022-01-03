@@ -91,6 +91,21 @@ class PrisonSimulation {
         sleep(1000);
         System.out.println("Prison generated!\n-");
         sleep(1000);
+        System.out.println("================ Visual Representation ===============\n");
+        System.out.println("|‾‾‾‾‾‾|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|‾Laundry|");
+        System.out.println("|  WO  |       Cafeteria and Kitchen        |  Room  |");
+        System.out.println("|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|");
+        System.out.println("|                      Hall A1                       |");
+        System.out.println("|      |‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|      |");
+        System.out.println("| Hall |           Recreation Area            | Hall |");
+        System.out.println("|  B1  |                                      |  B2  |");
+        System.out.println("|      ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾       |");
+        System.out.println("|                      Hall A2                       |");
+        System.out.println("|‾‾‾‾‾‾|‾‾‾‾‾‾‾‾‾|‾Cell‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|‾Cell‾‾‾‾|");
+        System.out.println("|  IS  | Showers | Block A                 | Block B |");
+        System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
+        System.out.println("WO = Wardens office; IS = Isolation");
+        System.out.println("=========================================================");
         // Final messages before simulating days
         System.out.println("Ready to begin simulating prison life!");
         int cbAcount = 0;
